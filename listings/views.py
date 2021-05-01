@@ -6,7 +6,14 @@ from django.core.paginator import Paginator, EmptyPage
 # Create your views here.
 
 def listings(request):
-    return render(request, 'listings/listings.html')
+    listings = Listing.objects.order_by('-list_date').filter(is_published=True)
+    paginator = Paginator(listings, 9)
+    page = request.GET.get('page')
+    page_listings = paginator.get_page(page)
+    context = {
+        'listings': page_listings
+    }
+    return render(request, 'listings/listings.html', context)
 
 
 def listing(request, pk):

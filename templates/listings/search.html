@@ -1,1 +1,176 @@
-Search
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Listing{% endblock %}
+
+{% block content %}
+
+<section id="showcase-inner" class="showcase-search text-white py-5">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <form action="search.html">
+            <!-- Form Row 1 -->
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Search</label>
+                <input type="text" name="keywords" class="form-control" placeholder="Search (Electronics, Gadgets, books)">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">City</label>
+                <input type="text" name="city" class="form-control" placeholder="City">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">State</label>
+                <select name="state" class="form-control">
+                  <option selected="true" disabled="disabled">State (All)</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="AR">Arunachal Pradesh</option>
+                    <option value="AS">Assam</option>
+                    <option value="BR">Bihar</option>
+                    <option value="CG">Chhattisgarh</option>
+                    <option value="GA">Goa</option>
+                    <option value="GJ">Gujarat</option>
+                    <option value="HP">Haryana</option>
+                    <option value="JH">Jharkhand</option>
+                    <option value="KA">Karnataka</option>
+                    <option value="GA">Kerala</option>
+                    <option value="KL">Hawaii</option>
+                    <option value="MP">Madhya Pradesh</option>
+                    <option value="MH">Maharashtra</option>
+                    <option value="MN">Manipur</option>
+                    <option value="ML">Meghalaya</option>
+                    <option value="MZ">Mizoram</option>
+                    <option value="NL">Nagaland</option>
+                    <option value="LA">Odisha</option>
+                    <option value="OD">Maine</option>
+                    <option value="PB">Punjab</option>
+                    <option value="RJ">Rajasthan</option>
+                    <option value="MI">Sikkim</option>
+                    <option value="TN">Tamil Nadu</option>
+                    <option value="TS">Telegana</option>
+                    <option value="TR">Tripura</option>
+                    <option value="UP">Uttar Pradesh</option>
+                    <option value="UK">Uttarakhand</option>
+                    <option value="WB">West Bengal</option>
+                </select>
+              </div>
+            </div>
+            <!-- Form Row 2 -->
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Category</label>
+                <select name="category" class="form-control">
+                  <option selected="true" disabled="disabled">Category (All)</option>
+                  <option value="1">Electronics</option>
+                  <option value="2">Books</option>
+                  <option value="3">Houses</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <select name="price" class="form-control">
+                  <option selected="true" disabled="disabled">Max Price (All)</option>
+                  <option value="100000">₹1,000</option>
+                  <option value="200000">₹2,000</option>
+                  <option value="300000">₹5,000</option>
+                  <option value="400000">₹10,000</option>
+                  <option value="500000">₹20,000</option>
+                  <option value="600000">₹50,000</option>
+                  <option value="700000">₹100,000</option>
+                  <option value="800000">₹200,000</option>
+                  <option value="900000">₹500,000</option>
+                  <option value="1000000">₹1M+</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="listings.html">Browse Listings</a>
+          </li>
+          <li class="breadcrumb-item active"> Search Results</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+
+        <!-- Listing 1 -->
+        {% if query_set %}
+        {% for listing in query_set %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white">₹ {{ listing.price | intcomma }}</span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary">{{ listing.title }}</h4>
+                <p>
+                  <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }} {{listing.state}}, {{listing.zipcode}}</p>
+              </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-8">
+                  <i class="fas fa-th-large"></i> Category: {{listing.category}}
+                </div>
+              </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-8">
+                  <i class="fas fa-user-alt"></i> Owner: {{listing.owner.first_name}}
+                </div>
+              </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-8">
+                  <i class="fas fa-phone"></i> Phone: {{listing.owner.phone}}
+                </div>
+                </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-10">
+                  <i class="fas fa-envelope"></i> Email: {{listing.owner.email}}
+                </div>
+              </div>
+            </div>
+              <hr>
+              <div class="row text-secondary pb-2 px-4">
+                <div class="col-10">
+                  <i class="fas fa-clock"></i>   {{ listing.list_date | timesince }}</div>
+              </div>
+              <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>        
+          </div>
+        </div>
+        {% endfor %}
+          {% else %}
+          <div class="col-md-12">
+            <p>Currently there are no Listings Available!</p>
+          </div>
+          {% endif %}
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  {% endblock %}

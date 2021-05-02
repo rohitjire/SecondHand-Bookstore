@@ -25,4 +25,14 @@ def listing(request, pk):
 
 
 def search(request):
-    return render(request, 'listings/search.html')
+    query_set = Listing.objects.order_by('list_date')
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            query_set = query_set.filter(title__icontains=keywords)
+
+    context = {
+        'query_set': query_set,
+    }
+
+    return render(request, 'listings/search.html', context)

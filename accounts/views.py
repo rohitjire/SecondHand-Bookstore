@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from core.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 import random
 import string
 
@@ -102,3 +102,19 @@ def confirm_register(request):
             return render(request, 'accounts/confirm_register.html', context)
     else:
         return redirect('register')
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "you are now Logged In!!")
+            return redirect('index')
+        else:
+            messages.error(request, 'Invalid credentials')
+            return redirect('login')
+    else:
+        return render(request, 'accounts/login.html')

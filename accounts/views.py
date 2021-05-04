@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from core.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 import random
 import string
 
@@ -118,3 +118,10 @@ def user_login(request):
             return redirect('login')
     else:
         return render(request, 'accounts/login.html')
+
+
+def user_logout(request):
+    if request.method == 'POST':
+        logout(request)
+        messages.success(request, "You are successfully Logged Out!")
+        return redirect('index')

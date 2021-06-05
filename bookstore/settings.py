@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'listings',
     'accounts',
+    'inquiry',
 ]
 
 MIDDLEWARE = [

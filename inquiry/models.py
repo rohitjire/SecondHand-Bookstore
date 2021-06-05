@@ -10,7 +10,7 @@ class Inquiry(models.Model):
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=100)
     message = models.TextField(blank=True)
-    contact_date = models.DateField(default=datetime.now())
+    contact_date = models.DateField(default=datetime.now)
     user_id = models.IntegerField(blank=True)
 
     def __str__(self):

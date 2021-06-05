@@ -21,7 +21,7 @@ def inquiry(request):
             has_inquired = Inquiry.objects.all().filter(listing_id=listing_id, user_id=user_id)
             if has_inquired:
                 messages.error(request, 'You have already made an inquiry for this listing')
-                return redirect('/listing/' + listing_id)
+                return redirect('/listings/' + listing_id)
             inquiry = Inquiry(listing=listing, listing_id=listing_id, name=name, email=email, phone=phone,
                               message=message, user_id=user_id)
             inquiry.save()
@@ -33,4 +33,4 @@ def inquiry(request):
                 fail_silently=False
             )
             messages.success(request, 'Your inquiry has been made, the Owner of the post will get back to you asap')
-            return redirect('/listing/' + listing_id)
+            return redirect('/listings/' + listing_id)

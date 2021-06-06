@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.contrib.auth import login, authenticate, logout
+from inquiry.models import Inquiry
 import random
 import string
 
@@ -138,3 +139,21 @@ def dashboard(request):
     }
 
     return render(request, 'accounts/dashboard.html', context)
+
+
+@login_required()
+def myinquiries(request):
+    myinquiry = Inquiry.objects.all().filter(user_id=request.user.id)
+    context = {
+        'myinquiries': myinquiry
+    }
+    return render(request, 'accounts/dashboard_myinquiries.html', context)
+
+
+@login_required()
+def inquiries(request):
+    inquiry = Inquiry.objects.all().filter(owner_id=request.user.id)
+    context = {
+        'inquiries': inquiry
+    }
+    return render(request, 'accounts/dashboard_inquiries.html', context)

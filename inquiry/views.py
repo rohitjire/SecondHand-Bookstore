@@ -15,6 +15,7 @@ def inquiry(request):
         message = request.POST['message']
         user_id = request.POST['user_id']
         owner_mail = request.POST['owner_mail']
+        owner_id = request.POST['owner_id']
 
         if request.user.is_authenticated:
             user_id = request.user.id
@@ -23,7 +24,7 @@ def inquiry(request):
                 messages.error(request, 'You have already made an inquiry for this listing')
                 return redirect('/listings/' + listing_id)
             inquiry = Inquiry(listing=listing, listing_id=listing_id, name=name, email=email, phone=phone,
-                              message=message, user_id=user_id)
+                              message=message, user_id=user_id,owner_id=owner_id)
             inquiry.save()
             send_mail(
                 'Inquiry for' + listing,

@@ -123,7 +123,7 @@ def user_login(request):
         return render(request, 'accounts/login.html')
 
 
-@login_required()
+@login_required
 def user_logout(request):
     if request.method == 'POST':
         logout(request)
@@ -131,7 +131,7 @@ def user_logout(request):
         return redirect('index')
 
 
-@login_required()
+@login_required
 def dashboard(request):
     mylistings = Listing.objects.order_by('-list_date').filter(owner=request.user)
     context = {
@@ -141,7 +141,7 @@ def dashboard(request):
     return render(request, 'accounts/dashboard.html', context)
 
 
-@login_required()
+@login_required
 def myinquiries(request):
     myinquiry = Inquiry.objects.all().filter(user_id=request.user.id)
     context = {
@@ -150,7 +150,7 @@ def myinquiries(request):
     return render(request, 'accounts/dashboard_myinquiries.html', context)
 
 
-@login_required()
+@login_required
 def inquiries(request):
     inquiry = Inquiry.objects.all().filter(owner_id=request.user.id)
     context = {
@@ -159,7 +159,7 @@ def inquiries(request):
     return render(request, 'accounts/dashboard_inquiries.html', context)
 
 
-@login_required()
+@login_required
 def send_reply(request):
     if request.method == "POST":
         email = request.POST['email']

@@ -27,7 +27,7 @@
         </nav>
     </div>
 </section>
-
+{% include 'partials/_alerts.html' %}
 <section id="dashboard" class="py-4">
     <div class="container">
         <div class="row">
@@ -43,6 +43,7 @@
                         <th scope="col">Listing</th>
 
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,11 @@
                         <td>
                             <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#inquiryModal">
                                 View Message
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#replyModal">
+                                Reply
                             </button>
                         </td>
                     </tr>
@@ -96,6 +102,47 @@
                                             <textarea name="message" class="form-control" placeholder="{{inquiry.message}}" readonly></textarea>
                                         </div>
                                         <hr>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="replyModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="inquiryModalLabel">Replying to {{inquiry.name}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="{% url 'send_reply' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="property_name" class="col-form-label">Item:</label>
+                                            <input type="text" name="listing" class="form-control"
+                                                   value="{{inquiry.listing}}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-form-label">Name:</label>
+                                            <input type="text" name="name" class="form-control" value="{{inquiry.name}}"
+                                                   readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email" class="col-form-label">Email:</label>
+                                            <input type="email" name="email" class="form-control"
+                                                   value="{{inquiry.email}}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message" class="col-form-label">Message:</label>
+                                            <textarea name="message" class="form-control" required></textarea>
+                                        </div>
+                                        <hr>
+                                        <input type="submit" value="Send" class="btn btn-block btn-secondary">
+
                                     </form>
                                 </div>
                             </div>

@@ -157,3 +157,23 @@ def inquiries(request):
         'inquiries': inquiry
     }
     return render(request, 'accounts/dashboard_inquiries.html', context)
+
+
+@login_required()
+def send_reply(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        message = request.POST['message']
+        listing = request.POST['listing']
+        send_mail(
+            'Reply from ' + listing + ' owner.',
+            message,
+            'rohitjire55@gmail.com',
+            [email],
+            fail_silently=False
+        )
+        messages.success(request,'your reply has been sent successfully')
+        return redirect('inquiries')
+
+    else:
+        return redirect('dashboard')

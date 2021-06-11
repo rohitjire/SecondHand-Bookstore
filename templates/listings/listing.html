@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <h1 class="display-4">{{listing.title}}</h1>
                 <p class="lead">
-                    <i class="fas fa-map-marker"></i> {{listing.city}} {{listing.state}}, {{listing.zipcode}}</p>
+                    <i class="fas fa-map-marker"></i> {{listing.city}}, {{listing.zipcode}}</p>
             </div>
         </div>
     </div>
@@ -96,8 +96,12 @@
                                 <span class="float-right">₹ {{ listing.price | intcomma }}</span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-bed"></i> Category:
-                                <span class="float-right">{{ listing.category }}</span>
+                                <i class="fas fa-bed"></i> Branch:
+                                <span class="float-right">{{ listing.branch }}</span>
+                            </li>
+                            <li class="list-group-item text-secondary">
+                                <i class="fas fa-bed"></i> Semester:
+                                <span class="float-right">{{ listing.semester }}</span>
                             </li>
                         </ul>
                     </div>

@@ -1,55 +1,27 @@
-category_choices = {
-    'Electronics': 'Electronics',
-    'Property': 'Electronics',
-    'Cars': 'Cars',
-    'Furniture': 'Furniture',
-    'Jobs': 'Jobs',
-    'Mobiles': 'Mobiles',
-    'Bikes': 'Bikes',
-    'Book': 'Book',
-    'Fashion': 'Fashion'
-}
+branch_choices = (
+    ("First-Year Engineering", "First-Year Engineering"),
+    ("Computer Engineering", "Computer Engineering"),
+    ("Information Technology", "Information Technology"),
+    ("Electronics & Telecommunication Engineering", "Electronics & Telecommunication Engineering"),
+    ("Mechanical Engineering", "Mechanical Engineering"),
+    ("Automobile Engineering", "Automobile Engineering"),
+    ("Civil Engineering", "Civil Engineering"),
+    ("Master of Business Administration", "Master of Business Administration"),
+)
 
-price_choices = {
-    '1000': '₹1,000',
-    '2000': '₹2,000',
-    '5000': '₹5,000',
-    '10000': '₹10,000',
-    '20000': '₹20,000',
-    '50000': '₹50,000',
-    '100000': '₹100,000',
-    '200000': '₹200,000',
-    '500000': '₹500,000',
-    '1000000': '₹1M+',
+semester_choices = (
+    ('Semester 1', 'Semester 1'),
+    ('Semester 2', 'Semester 2'),
+    ('Semester 3', 'Semester 3'),
+    ('Semester 4', 'Semester 4'),
+    ('Semester 5', 'Semester 5'),
+    ('Semester 6', 'Semester 6'),
+    ('Semester 7', 'Semester 7'),
+    ('Semester 8', 'Semester 8'),
+)
 
-}
-
-state_choices = {
-    'AP': 'Andhra Pradesh',
-    'AR': 'Arunachal Pradesh',
-    'AS': 'Assam',
-    'BR': 'Bihar',
-    'CG': 'Chhattisgarh',
-    'GA': 'Goa',
-    'GJ': 'Gujarat',
-    'HP': 'Haryana',
-    'JH': 'Jharkhand',
-    'KA': 'Karnataka',
-    'KL': 'Kerala',
-    'MP': 'Madhya Pradesh',
-    'MH': 'Maharashtra',
-    'MN': 'Manipur',
-    'ML': 'Meghalaya',
-    'MZ': 'Mizoram',
-    'NL': 'Nagaland',
-    'OD': 'Odisha',
-    'PB': 'Punjab',
-    'RJ': 'Rajasthan',
-    'MI': 'Sikkim',
-    'TN': 'Tamil Nadu',
-    'TS': 'Telegana',
-    'TR': 'Tripura',
-    'UP': 'Uttar Pradesh',
-    'UK': 'Uttarakhand',
-    'WB': 'West Bengal',
-}
+category_choices = (
+    ('Books', 'Books'),
+    ('Notes', 'Notes'),
+    ('Stationary Tools', 'Stationary Tools'),
+)

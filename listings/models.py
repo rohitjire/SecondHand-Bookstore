@@ -4,14 +4,17 @@ from core.models import User
 
 
 # Create your models here.
+from listings.choices import branch_choices, semester_choices, category_choices
+
 
 class Listing(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
+    branch = models.CharField(max_length=100, choices=branch_choices, blank=True )
+    semester = models.CharField(max_length=100, choices=semester_choices, blank=True)
     address = models.TextField(max_length=100)
     city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
+    category = models.CharField(max_length=100,choices=category_choices,blank=True)
     zipcode = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     price = models.IntegerField()

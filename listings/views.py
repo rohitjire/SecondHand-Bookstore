@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ListingForm, UpdateForm
 from .models import Listing
 from django.core.paginator import Paginator, EmptyPage
-from .choices import price_choices, category_choices, state_choices
+from .choices import  branch_choices, semester_choices, category_choices
 
 
 # Create your views here.
@@ -38,24 +38,24 @@ def search(request):
         city = request.GET['city']
         if city:
             query_set = query_set.filter(city__iexact=city)
+    if 'branch' in request.GET:
+        branch = request.GET['branch']
+        if branch:
+            query_set = query_set.filter(branch__iexact=branch)
     if 'category' in request.GET:
         category = request.GET['category']
         if category:
             query_set = query_set.filter(category__iexact=category)
-    if 'state' in request.GET:
-        state = request.GET['state']
-        if state:
-            query_set = query_set.filter(state__iexact=state)
-    if 'price' in request.GET:
-        price = request.GET['price']
-        if price:
-            query_set = query_set.filter(price__lte=price)
+    if 'semester' in request.GET:
+        semester = request.GET['semester']
+        if semester:
+            query_set = query_set.filter(semester__iexact=semester)
 
     context = {
         'query_set': query_set,
-        'price_choices': price_choices,
-        'state_choices': state_choices,
+        'branch_choices': branch_choices,
         'category_choices': category_choices,
+        'semester_choices': semester_choices,
         'values': request.GET,
     }
 

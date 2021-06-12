@@ -4,6 +4,7 @@ from listings.models import Listing
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth import login, authenticate, logout
 from inquiry.models import Inquiry
 import random
@@ -172,8 +173,34 @@ def send_reply(request):
             [email],
             fail_silently=False
         )
-        messages.success(request,'your reply has been sent successfully')
+        messages.success(request, 'your reply has been sent successfully')
         return redirect('inquiries')
 
     else:
         return redirect('dashboard')
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        user = request.user
+
+        currentpassword = request.POST['currentpassword']
+        if not check_password(currentpassword,user.password):
+            messages.error(request,'Incorrect Current Password')
+            return redirect('dashboard')
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        if password1 == password2:
+            user.set_password(password1)
+            user.save()
+            messages.success(request, 'You have been logged out ')
+            messages.success(request, 'You have successfully changed the password')
+            messages.success(request, 'Use your new password to login')
+        else:
+            messages.error(request, 'Password do not match')
+        return redirect('dashboard')
+
+    else:
+        return render(request,'accounts/change_password.html')

@@ -38,6 +38,15 @@
             {% endif%}>
             <a class="nav-link btn btn-outline-primary" href="{% url 'create' %}">Create Listings</a>
           </li>
+          </li>
+          <li
+            {% if 'change_password' in request.path %}
+              class = "nav-item active mr-3 "
+            {% else%}
+              class="nav-item mr-3"
+            {% endif%}>
+            <a class="nav-link btn btn-outline-primary" href="{% url 'change_password' %}">Change Password</a>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
 
